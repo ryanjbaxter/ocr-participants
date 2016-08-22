@@ -1,4 +1,6 @@
 # ocr-participants
+[![CircleCI](https://circleci.com/gh/ryanjbaxter/ocr-participants.svg?style=svg)](https://circleci.com/gh/ryanjbaxter/ocr-participants)
+
 Repo for OCR Participants service from my [blog](http://ryanjbaxter.com).
 
 ## Running
