@@ -1,3 +1,10 @@
 spring:
   application:
     name: participants
+
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri:  http://config:8888
