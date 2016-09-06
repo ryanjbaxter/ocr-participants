@@ -24,12 +24,12 @@ deployment:
   hub:
     branch: master
     commands:
-      - docker info
-      - docker build -t ryanjbaxter/ocr-participants .
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push ryanjbaxter/ocr-participants
+#      - docker info
+#      - docker build -t ryanjbaxter/ocr-participants .
+#      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+#      - docker push ryanjbaxter/ocr-participants
       - cf push --no-start
-      - cf bind-service ocr-participants ocr-eureka
-      - cf bind-service ocr-participants ocr-config-server
-      - cf set-env ocr-participants SPRING_PROFILES_ACTIVE cloud
-      - cf start ocr-participants
+      - cf bind-service ocr-participants-new ocr-eureka
+      - cf bind-service ocr-participants-new ocr-config-server
+      - cf set-env ocr-participants-new SPRING_PROFILES_ACTIVE cloud
+      - cf start ocr-participants-new

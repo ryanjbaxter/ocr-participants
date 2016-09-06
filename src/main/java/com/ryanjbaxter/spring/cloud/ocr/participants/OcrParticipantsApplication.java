@@ -37,7 +37,8 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		participants.add(new Participant("Ryan", "Baxter", "MA", "S", Arrays.asList("123", "456")));
-		participants.add(new Participant("Stephanie", "Baxter", "MA", "S", Arrays.asList("456")));		
+		participants.add(new Participant("Stephanie", "Baxter", "MA", "S", Arrays.asList("456")));
+		participants.add(new Participant("Bob", "Smith", "MA", "S", Arrays.asList("456")));
 	}
 	
 	@RequestMapping("/")
