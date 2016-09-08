@@ -1,5 +1,6 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.health.Health;
@@ -9,8 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.sleuth.sampler.AlwaysSampler;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -34,6 +37,9 @@ public class OcrParticipantsApplication implements CommandLineRunner {
       return new AlwaysSampler();
     }
 
+    @Autowired
+	public MyHealth health;
+
 	@Override
 	public void run(String... arg0) throws Exception {
 		participants.add(new Participant("Ryan", "Baxter", "MA", "S", Arrays.asList("123", "456")));
@@ -43,12 +49,23 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	
 	@RequestMapping("/")
 	public List<Participant> getParticipants() {
+		if(!health.health().equals(Status.UP)) {
+			throw new OutOfServiceException();
+		}
 		return participants;
 	}
 	
 	@RequestMapping("/races/{id}")
 	public List<Participant> getParticipants(@PathVariable String id) {
+		if(!health.health().equals(Status.UP)) {
+			throw new OutOfServiceException();
+		}
 		return participants.stream().filter(p -> p.getRaces().contains(id)).collect(Collectors.toList());
+	}
+
+	@ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR, reason="Server unhealthy")
+	static class OutOfServiceException extends RuntimeException {
+
 	}
 }
 
