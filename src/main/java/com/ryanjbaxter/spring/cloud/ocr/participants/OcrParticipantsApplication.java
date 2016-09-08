@@ -50,8 +50,6 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	
 	@RequestMapping("/")
 	public List<Participant> getParticipants() {
-		System.out.println(healthEndpoint.invoke().getStatus());
-		System.out.println(Health.up().build());
 		if(!healthEndpoint.invoke().getStatus().equals(Status.UP)) {
 			throw new OutOfServiceException();
 		}
