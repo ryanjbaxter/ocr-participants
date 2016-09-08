@@ -3,6 +3,7 @@ package com.ryanjbaxter.spring.cloud.ocr.participants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.actuate.health.Status;
@@ -38,7 +39,7 @@ public class OcrParticipantsApplication implements CommandLineRunner {
     }
 
     @Autowired
-	public MyHealth health;
+	private HealthEndpoint healthEndpoint;
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -49,7 +50,7 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	
 	@RequestMapping("/")
 	public List<Participant> getParticipants() {
-		if(!health.health().equals(Status.UP)) {
+		if(!healthEndpoint.invoke().equals(Health.up())) {
 			throw new OutOfServiceException();
 		}
 		return participants;
@@ -57,7 +58,7 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	
 	@RequestMapping("/races/{id}")
 	public List<Participant> getParticipants(@PathVariable String id) {
-		if(!health.health().equals(Status.UP)) {
+		if(!healthEndpoint.invoke().equals(Health.up())) {
 			throw new OutOfServiceException();
 		}
 		return participants.stream().filter(p -> p.getRaces().contains(id)).collect(Collectors.toList());
