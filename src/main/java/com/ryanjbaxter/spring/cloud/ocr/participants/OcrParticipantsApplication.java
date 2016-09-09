@@ -64,6 +64,26 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 		return participants.stream().filter(p -> p.getRaces().contains(id)).collect(Collectors.toList());
 	}
 
+	@RequestMapping("/slow")
+	public List<Participant> getSlowParticipants() {
+		try {
+			Thread.sleep(80000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return getParticipants();
+	}
+
+	@RequestMapping("/slow/races/{id}")
+	public List<Participant> getSlowParticipants(@PathVariable String id) {
+		try {
+			Thread.sleep(80000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return getParticipants(id);
+	}
+
 	@ResponseStatus(value= HttpStatus.INTERNAL_SERVER_ERROR, reason="Server unhealthy")
 	static class OutOfServiceException extends RuntimeException {
 
