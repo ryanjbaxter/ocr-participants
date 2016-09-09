@@ -50,6 +50,11 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	@RequestMapping("/")
 	public List<Participant> getParticipants() {
 		if(!healthEndpoint.invoke().getStatus().equals(Status.UP)) {
+			try {
+				Thread.sleep(80000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			throw new OutOfServiceException();
 		}
 		return participants;
@@ -58,6 +63,11 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 	@RequestMapping("/races/{id}")
 	public List<Participant> getParticipants(@PathVariable String id) {
 		if(!healthEndpoint.invoke().getStatus().equals(Status.UP)) {
+			try {
+				Thread.sleep(80000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			throw new OutOfServiceException();
 		}
 		return participants.stream().filter(p -> p.getRaces().contains(id)).collect(Collectors.toList());
