@@ -1,5 +1,9 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @SpringBootApplication
@@ -65,11 +64,6 @@ public class OcrParticipantsApplication implements CommandLineRunner {
 
 	@RequestMapping("/slow")
 	public List<Participant> getSlowParticipants() {
-		try {
-			Thread.sleep(80000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return getParticipants();
 	}
 
