@@ -17,6 +17,7 @@ class Participant {
 	private String homeState;
 	private String shirtSize;
 	private List<String> races;
+	public Participant(){}
 	public Participant(String firstName, String lastName, String homeState,
 					   String shirtSize, List<String> races) {
 		super();

@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
  */
 public class DefaultParticipantsService implements ParticipantsService {
 
-	private List<Participant> participants = new ArrayList<Participant>();
-
-	public DefaultParticipantsService() {
+	private static List<Participant> participants = new ArrayList<Participant>();
+	static{
 		participants.add(new Participant("Ryan", "Baxter", "MA", "S", Arrays.asList("123", "456")));
 		participants.add(new Participant("Stephanie", "Baxter", "MA", "S", Arrays.asList("456")));
 	}
