@@ -13,3 +13,10 @@ spring:
     config:
       uri:  http://config:8888
       failFast: true
+
+---
+spring:
+  profiles: test
+  cloud:
+    config:
+      failFast: false
