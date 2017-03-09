@@ -12,9 +12,9 @@
 	<description>Service providing a list of OCR Participants</description>
 
 	<parent>
-		<groupId>com.ryanjbaxter.spring.cloud</groupId>
-		<artifactId>ocr-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
