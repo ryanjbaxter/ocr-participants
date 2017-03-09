@@ -21,6 +21,10 @@ test:
     - cf a
 
 deployment:
+  releases:
+    branch: master
+    commands:
+      - ./mvnw clean deploy -s settings.xml
   hub:
     branch: master
     commands:
