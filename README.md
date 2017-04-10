@@ -18,6 +18,12 @@ Alternatively you can run this application using an [image](https://hub.docker.c
 $ docker run -i -p 8383:8383 ryanjbaxter/ocr-participants
 ```
 
+# Concourse CI
+
+To use the Concourse pipeline run
+
+`$ fly -t local set-pipeline --pipeline ocr-participants --config ci/pipelines/ocr-parent.yml --var "SONATYPE_USER=username" --var "SONATYPE_PASSWORD=password"`
+
 ## Usage
 This app provides participant information for various races.
 
