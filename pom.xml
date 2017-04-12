@@ -23,6 +23,13 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<scm>
+		<url>git@github.com:ryanjbaxter/ocr-participants.git</url>
+		<connection>scm:git@github.com:ryanjbaxter/ocr-participants.git</connection>
+		<developerConnection>scm:git:git@github.com:ryanjbaxter/ocr-participants.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
