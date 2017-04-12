@@ -74,7 +74,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Camden.SR5</version>
+				<version>Camden.SR6</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -113,6 +113,7 @@
 				<configuration>
 					<packageWithBaseClasses>com.ryanjbaxter.spring.cloud.ocr.participants.base</packageWithBaseClasses>
 				</configuration>
+				<version>1.0.4.RELEASE</version>
 			</plugin>
 		</plugins>
 	</build>
