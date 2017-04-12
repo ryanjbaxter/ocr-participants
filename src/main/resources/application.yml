@@ -1,8 +1,0 @@
-server:
-  port: 8181
----
-spring:
-  profiles: test
-eureka:
-  client:
-    enabled: false
