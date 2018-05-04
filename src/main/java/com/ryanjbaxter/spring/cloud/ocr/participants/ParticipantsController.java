@@ -1,7 +1,8 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
 import java.util.List;
-import org.springframework.boot.actuate.endpoint.HealthEndpoint;
+
+import org.springframework.boot.actuate.health.HealthEndpoint;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class ParticipantsController {
 	}
 	@RequestMapping("/")
 	public List<Participant> getParticipants() {
-		if(!healthEndpoint.invoke().getStatus().equals(Status.UP)) {
+		if(!healthEndpoint.health().getStatus().equals(Status.UP)) {
 			throw new OutOfServiceException();
 		}
 		return participantsService.getParticipants();
@@ -32,7 +33,7 @@ public class ParticipantsController {
 
 	@RequestMapping("/races/{id}")
 	public List<Participant> getParticipants(@PathVariable String id) {
-		if(!healthEndpoint.invoke().getStatus().equals(Status.UP)) {
+		if(!healthEndpoint.health().getStatus().equals(Status.UP)) {
 			throw new OutOfServiceException();
 		}
 		return participantsService.getParticipants(id);
