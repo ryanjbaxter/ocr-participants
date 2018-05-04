@@ -1,6 +1,6 @@
 ---
 applications:
 - name: ocr-participants
-  memory: 512M
+  memory: 1024M
   path: target/ocr-participants-0.0.2-SNAPSHOT.jar
   host: ocr-participants-cf
