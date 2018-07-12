@@ -81,7 +81,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Finchley.RC1</version>
+				<version>Finchley.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -154,7 +154,7 @@
 				<configuration>
 					<packageWithBaseClasses>com.ryanjbaxter.spring.cloud.ocr.participants.base</packageWithBaseClasses>
 				</configuration>
-				<version>2.0.0.RC1</version>
+				<version>2.0.0.RELEASE</version>
 			</plugin>
 		</plugins>
 	</build>
