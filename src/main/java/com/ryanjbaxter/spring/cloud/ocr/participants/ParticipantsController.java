@@ -1,6 +1,12 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
+import reactor.core.publisher.Flux;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.actuate.health.HealthEndpoint;
 import org.springframework.boot.actuate.health.Status;
@@ -24,7 +30,7 @@ public class ParticipantsController {
 		this.participantsService = participantsService;
 	}
 	@RequestMapping("/")
-	public List<Participant> getParticipants() {
+	public Flux<Participant> getParticipants() {
 		if(!healthEndpoint.health().getStatus().equals(Status.UP)) {
 			throw new OutOfServiceException();
 		}
@@ -32,7 +38,7 @@ public class ParticipantsController {
 	}
 
 	@RequestMapping("/races/{id}")
-	public List<Participant> getParticipants(@PathVariable String id) {
+	public Flux<Participant> getParticipants(@PathVariable String id) {
 		if(!healthEndpoint.health().getStatus().equals(Status.UP)) {
 			throw new OutOfServiceException();
 		}
@@ -40,18 +46,13 @@ public class ParticipantsController {
 	}
 
 	@RequestMapping("/slow")
-	public List<Participant> getSlowParticipants() {
+	public Flux<Participant> getSlowParticipants() {
 		return getParticipants();
 	}
 
 	@RequestMapping("/slow/races/{id}")
-	public List<Participant> getSlowParticipants(@PathVariable String id) {
-		try {
-			Thread.sleep(80000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return getParticipants(id);
+	public Flux<Participant> getSlowParticipants(@PathVariable String id) {
+		return getParticipants(id).delayElements(Duration.of(80000, ChronoUnit.MILLIS));
 	}
 
 

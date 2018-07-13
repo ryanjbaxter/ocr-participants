@@ -1,14 +1,16 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
+import reactor.core.publisher.Flux;
+
 import java.util.List;
 
 /**
  * @author Ryan Baxter
  */
 public interface ParticipantsService {
-	public List<Participant> getParticipants();
+	public Flux<Participant> getParticipants();
 
-	public List<Participant> getParticipants(String raceId);
+	public Flux<Participant> getParticipants(String raceId);
 }
 
 class Participant {

@@ -32,14 +32,14 @@ public class DefaultParticipantsServiceTest {
 	@Test
 	public void getAllParticipantsTest() {
 		DefaultParticipantsService participantsService = new DefaultParticipantsService();
-		assertEquals(participants, participantsService.getParticipants());
+		assertEquals(participants, participantsService.getParticipants().collectList().block());
 	}
 
 	@Test
 	public void getAllParticipantsWithRaceTest() {
 		DefaultParticipantsService participantsService = new DefaultParticipantsService();
-		assertTrue(participantsService.getParticipants("1234523").isEmpty());
-		assertEquals(Arrays.asList(this.participants.get(0)), participantsService.getParticipants("123"));
-		assertEquals(this.participants, participantsService.getParticipants("456"));
+		assertTrue(participantsService.getParticipants("1234523").collectList().block().isEmpty());
+		assertEquals(Arrays.asList(this.participants.get(0)), participantsService.getParticipants("123").collectList().block());
+		assertEquals(this.participants, participantsService.getParticipants("456").collectList().block());
 	}
 }

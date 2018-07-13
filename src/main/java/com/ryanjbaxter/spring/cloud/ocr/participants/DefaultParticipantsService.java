@@ -1,5 +1,7 @@
 package com.ryanjbaxter.spring.cloud.ocr.participants;
 
+import reactor.core.publisher.Flux;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,13 +18,26 @@ public class DefaultParticipantsService implements ParticipantsService {
 		participants.add(new Participant("Stephanie", "Baxter", "MA", "S", Arrays.asList("456")));
 	}
 
-	@Override
-	public List<Participant> getParticipants() {
+	public List<Participant> getParticipantsAsList() {
 		return participants;
 	}
 
+	public Participant[] getParticipantsAsArray() {
+		return participants.toArray(new Participant[participants.size()]);
+	}
+
+	public Participant[] getParticipantsAsArray(String raceId) {
+		List<Participant> participantList = participants.stream().filter(p -> p.getRaces().contains(raceId)).collect(Collectors.toList());
+		return participantList.toArray(new Participant[participantList.size()]);
+	}
+
 	@Override
-	public List<Participant> getParticipants(String raceId) {
-		return participants.stream().filter(p -> p.getRaces().contains(raceId)).collect(Collectors.toList());
+	public Flux<Participant> getParticipants() {
+		return Flux.fromIterable(getParticipantsAsList());
+	}
+
+	@Override
+	public Flux<Participant> getParticipants(String raceId) {
+		return Flux.fromStream(participants.stream().filter(p -> p.getRaces().contains(raceId)));
 	}
 }
